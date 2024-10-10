@@ -7,6 +7,8 @@ import com.compass.challenger.PaymentRoutingApplication.core.domain.constants.Pa
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.services.sqs.SqsClient;
 import software.amazon.awssdk.services.sqs.model.SendMessageRequest;
@@ -22,6 +24,7 @@ public class SendPaymentsSqsUseCaseImpl implements SendPaymentsSqsUseCase {
     private final Map<PaymentType, String> paymentTypeSqsMap;
 
     @Override
+    @Retryable(retryFor = { BusinessException.class }, backoff = @Backoff(delay = 1000))
     public void sendMessageToQueueByStatus(PaymentItemRequest paymentItemRequest, PaymentType paymentStatus) {
         try {
             var queueUrl = this.paymentTypeSqsMap.get(paymentStatus);
