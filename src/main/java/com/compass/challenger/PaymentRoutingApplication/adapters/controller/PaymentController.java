@@ -1,7 +1,7 @@
 package com.compass.challenger.PaymentRoutingApplication.adapters.controller;
 
 import com.compass.challenger.PaymentRoutingApplication.application.dto.payment.PaymentRequest;
-import com.compass.challenger.PaymentRoutingApplication.application.service.PaymentServiceImpl;
+import com.compass.challenger.PaymentRoutingApplication.application.service.PaymentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/payments")
 public class PaymentController implements PaymentControllerOperation {
 
-    private final PaymentServiceImpl service;
+    private final PaymentService service;
 
     @PutMapping
     public ResponseEntity<PaymentRequest> setPayment(@RequestBody @Valid PaymentRequest paymentRequest) {
