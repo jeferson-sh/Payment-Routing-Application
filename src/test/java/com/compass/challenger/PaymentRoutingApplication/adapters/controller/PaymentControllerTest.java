@@ -8,15 +8,21 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import software.amazon.awssdk.services.sqs.SqsClient;
+import software.amazon.awssdk.services.sqs.model.SendMessageRequest;
+import software.amazon.awssdk.services.sqs.model.SendMessageResponse;
 
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -28,6 +34,9 @@ class PaymentControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private SqsClient client;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -139,7 +148,7 @@ class PaymentControllerTest {
     void testPartialPaymentSuccess() throws Exception {
         var paymentItem = new PaymentItemRequest(1L, new BigDecimal("10.0"), null);
         var paymentRequest = new PaymentRequest(1L, List.of(paymentItem));
-
+        when(this.client.sendMessage(any(SendMessageRequest.class))).thenReturn(SendMessageResponse.builder().build());
         mockMvc.perform(put("/api/v1/payments")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(paymentRequest)))
@@ -155,7 +164,7 @@ class PaymentControllerTest {
     void testTotalPaymentSuccess() throws Exception {
         var paymentItem = new PaymentItemRequest(1L, new BigDecimal("100.0"), null);
         var paymentRequest = new PaymentRequest(1L, List.of(paymentItem));
-
+        when(this.client.sendMessage(any(SendMessageRequest.class))).thenReturn(SendMessageResponse.builder().build());
         mockMvc.perform(put("/api/v1/payments")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(paymentRequest)))
@@ -171,7 +180,7 @@ class PaymentControllerTest {
     void testExceededPaymentSuccess() throws Exception {
         var paymentItem = new PaymentItemRequest(1L, new BigDecimal("150.0"), null);
         var paymentRequest = new PaymentRequest(1L, List.of(paymentItem));
-
+        when(this.client.sendMessage(any(SendMessageRequest.class))).thenReturn(SendMessageResponse.builder().build());
         mockMvc.perform(put("/api/v1/payments")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(paymentRequest)))
