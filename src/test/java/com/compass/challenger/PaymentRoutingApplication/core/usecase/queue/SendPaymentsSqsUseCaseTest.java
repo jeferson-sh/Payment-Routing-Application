@@ -1,10 +1,8 @@
 package com.compass.challenger.PaymentRoutingApplication.core.usecase.queue;
 
-import com.compass.challenger.PaymentRoutingApplication.PaymentRoutingApplication;
 import com.compass.challenger.PaymentRoutingApplication.application.dto.payment.PaymentItemRequest;
 import com.compass.challenger.PaymentRoutingApplication.core.domain.constants.PaymentType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

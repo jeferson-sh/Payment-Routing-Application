@@ -1,9 +1,9 @@
 package com.compass.challenger.PaymentRoutingApplication.application.service;
 
 import com.compass.challenger.PaymentRoutingApplication.application.dto.payment.PaymentRequest;
+import com.compass.challenger.PaymentRoutingApplication.core.usecase.payment.PaymentItemValidationUseCase;
 import com.compass.challenger.PaymentRoutingApplication.core.usecase.queue.SendPaymentsSqsUseCase;
 import com.compass.challenger.PaymentRoutingApplication.core.usecase.seller.SellerValidationUseCase;
-import com.compass.challenger.PaymentRoutingApplication.core.usecase.payment.PaymentItemValidationUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
