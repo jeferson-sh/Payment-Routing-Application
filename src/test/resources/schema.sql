@@ -1,3 +1,15 @@
+-- Dropar a tabela Seller, pois depende da tabela Client
+DROP TABLE IF EXISTS sellers;
+
+-- Dropar a tabela PaymentItem, pois depende da tabela Payment
+DROP TABLE IF EXISTS payment_items;
+
+-- Dropar a tabela Payment
+DROP TABLE IF EXISTS payments;
+
+-- Dropar a tabela Client por último, já que outras tabelas dependem dela
+DROP TABLE IF EXISTS clients;
+
 -- Tabela Client
 CREATE TABLE clients (
     client_id BIGSERIAL PRIMARY KEY,

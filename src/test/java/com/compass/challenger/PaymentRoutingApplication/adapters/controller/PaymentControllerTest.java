@@ -209,4 +209,13 @@ class PaymentControllerTest {
                 .andExpect(jsonPath("$.error", is("PAYMENT_ITEM_NOT_FOUND")))
                 .andExpect(jsonPath("$.message", is("Payment item with id: 10 not found")));
     }
+
+    @Test
+    @DisplayName("Should return GENERIC_ERROR for NoResourceFoundException when accessing invalid static resource")
+    void testGenericErrorForInvalidResource() throws Exception {
+        mockMvc.perform(put("/api/v1/payment"))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("$.error", is("GENERIC_ERROR")))
+                .andExpect(jsonPath("$.message", is("org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/v1/payment.: No static resource api/v1/payment.")));
+    }
 }
