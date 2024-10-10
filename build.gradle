@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.compass.challenger'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 
 java {
 	toolchain {
@@ -70,4 +70,10 @@ tasks.jacocoTestReport {
 			])
 		}))
 	}
+}
+
+tasks.named('bootJar') {
+	archiveBaseName.set('payment-routing-application')  // Define o nome do JAR
+	archiveVersion.set(version)
+	archiveClassifier.set('')
 }
