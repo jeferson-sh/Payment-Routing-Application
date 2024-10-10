@@ -31,6 +31,7 @@ Para rodar esta aplicação, você precisará ter instalado:
 ## Configuração Inicial
 
 A aplicação está configurada para usar o **PostgreSQL** em produção e **H2** em memória para os testes.
+Para rodar em ambiente local precisa ser no perfil correto. Atravez da variável: `spring_profiles_active=local`.
 O projeto já inclui um arquivo `./docker/docker-compose.yml` para subir os serviços necessários, como PostgreSQL e LocalStack.
 
 ### Configurar o LocalStack
