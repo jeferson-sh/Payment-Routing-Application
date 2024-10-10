@@ -5,7 +5,6 @@
 1. [Introdução](#introdução)
 2. [Requisitos](#requisitos)
 3. [Configuração Inicial](#configuração-inicial)
-4. [Execução](#execução)
 5. [Estrutura do Projeto](#estrutura-do-projeto)
 6. [Modelagem de Tabelas](#modelagem-de-tabelas)
 7. [Tratamento de Erros](#tratamento-de-erros)
